@@ -1,0 +1,22 @@
+# DB Config
+spring:
+  config:
+    import: file:./config/env.properties
+  datasource:
+    hikari:
+      connection-timeout: 10000
+      max-lifetime: 30000
+      maximum-pool-size: 30
+      minimum-idle: 2
+      validation-timeout: 60000 # 아래 테스트 쿼리 주기 설정
+      connection-test-query: select '1'
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+
+# App Config
+info:
+  app:
+    description: 'local 환경 입니다.'
