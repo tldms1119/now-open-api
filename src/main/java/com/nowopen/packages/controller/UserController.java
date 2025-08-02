@@ -21,14 +21,13 @@ public class UserController {
     final UserService userService;
 
     @GetMapping("/check-id")
-    public ResponseEntity<BaseResponseVO> checkId(String id){
-        log.info("Check ID duplication");
-        boolean isExist = userService.checkId(id);
+    public ResponseEntity<BaseResponseVO> checkEmailDuplicated(String email){
+        boolean isExist = userService.checkEmailDuplicated(email);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(BaseResponseVO.builder()
                         .result(!isExist)
-                        .message(isExist ? "Already existed ID" : "This ID is available")
+                        .message(isExist ? "Email already exists" : "This email is available")
                         .build());
     }
 

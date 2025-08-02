@@ -16,14 +16,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false, unique = true)
-    private String userId;
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
     private String pw;
 
     @Column(nullable = false)
-    private String email;
+    private String username;
 
     @Column(name = "user_type", nullable = false)
     private String userType;

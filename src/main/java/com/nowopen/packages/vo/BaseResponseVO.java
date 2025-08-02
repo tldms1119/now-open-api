@@ -11,5 +11,6 @@ public class BaseResponseVO {
 
      private boolean result;
      private String message;
+     private String payload;
 
 }
