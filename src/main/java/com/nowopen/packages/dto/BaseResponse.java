@@ -1,4 +1,4 @@
-package com.nowopen.packages.vo;
+package com.nowopen.packages.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,10 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class BaseResponseVO {
+public class BaseResponse<T> {
 
      private boolean result;
      private String message;
-     private String payload;
+     private T payload;
 
 }

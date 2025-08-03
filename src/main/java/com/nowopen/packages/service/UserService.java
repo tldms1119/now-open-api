@@ -1,6 +1,7 @@
 package com.nowopen.packages.service;
 
 import com.nowopen.packages.common.exception.ServiceException;
+import com.nowopen.packages.dto.UserDto;
 import com.nowopen.packages.entity.User;
 import com.nowopen.packages.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,23 +22,24 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public User signUp(String email, String password, String username) {
-        String hashedPw = passwordEncoder.encode(password);
+    public UserDto signUp(UserDto dto) {
+        String hashedPw = passwordEncoder.encode(dto.getPassword());
         User user = new User();
-        user.setEmail(email);
+        user.setEmail(dto.getEmail());
         user.setPw(hashedPw);
-        user.setUsername(username);
+        user.setUsername(dto.getUsername());
         user.setUserType("USER");
-        return userRepository.save(user);
+        userRepository.save(user);
+        return UserDto.builder().email(user.getEmail()).username(user.getUsername()).build();
     }
 
-    public User signIn(String email, String password) {
-        User user = userRepository.findByEmail(email)
+    public UserDto signIn(UserDto dto) {
+        User user = userRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new ServiceException(HttpStatus.UNAUTHORIZED, "Invalid email or password"));
-        if (!passwordEncoder.matches(password, user.getPw())) {
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPw())) {
             throw new ServiceException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
         }
-        return user;
+        return UserDto.builder().email(user.getEmail()).username(user.getUsername()).build();
     }
 
 }

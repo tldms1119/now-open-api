@@ -1,6 +1,6 @@
 package com.nowopen.packages.common.exception;
 
-import com.nowopen.packages.vo.ErrorResponseVO;
+import com.nowopen.packages.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -16,13 +16,13 @@ import java.util.Enumeration;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
-    public ResponseEntity<ErrorResponseVO> serviceExceptionHandler(ServiceException e) {
+    public ResponseEntity<ErrorResponse> serviceExceptionHandler(ServiceException e) {
         log.error("[ERROR_MESSAGE]: " + e.getMessage());
         log.error(e.getErrorSource());
         loggingRequestParams();
 
         return ResponseEntity.status(e.getHttpStatus()).body(
-                ErrorResponseVO.builder()
+                ErrorResponse.builder()
                         .result(false)
                         .message(e.getMessage())
                         .status(e.getHttpStatus())
@@ -31,12 +31,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponseVO> handleGenericException(Exception e) {
+    public ResponseEntity<ErrorResponse> handleGenericException(Exception e) {
         log.error("[ERROR_MESSAGE]: " + e.getMessage());
         loggingRequestParams();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                ErrorResponseVO.builder()
+                ErrorResponse.builder()
                         .result(false)
                         .message(e.getMessage())
                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
