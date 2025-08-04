@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -30,7 +30,7 @@ public class UserController {
                         .build());
     }
 
-    @PostMapping("/sign_up")
+    @PostMapping("/sign-up")
     public ResponseEntity<BaseResponse<UserDto>> signUp(@RequestBody UserDto req){
         UserDto dto = userService.signUp(req);
         return ResponseEntity
@@ -41,7 +41,7 @@ public class UserController {
                         .build());
     }
 
-    @PostMapping("/sign_ip")
+    @PostMapping("/sign-in")
     public ResponseEntity<BaseResponse<UserDto>> signIp(@RequestBody UserDto req){
         UserDto dto = userService.signIn(req);
         return ResponseEntity
