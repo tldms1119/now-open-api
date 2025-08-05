@@ -15,6 +15,11 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
+security:
+  jwt:
+    secret-key: ${JWT_SECRET}
+    expiration-time: 3600000
+
 
 # App Config
 info:

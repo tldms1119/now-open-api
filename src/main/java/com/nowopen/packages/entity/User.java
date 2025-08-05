@@ -5,14 +5,18 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "public")
 @Getter
 @Setter
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +42,47 @@ public class User {
     @Column(name = "update_date", nullable = false)
     private LocalDateTime updateDate;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = List.of(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return "USER_ROLE";
+            }
+        });
+        if("OWNER".equals(this.userType)){
+            authorities.add(new GrantedAuthority() {
+                @Override
+                public String getAuthority() {
+                    return "OWNER_ROLE";
+                }
+            });
+        }
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return pw;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
