@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
 // MockitoExtension.class is used unit test, using with @Mock, @InjectMocks
@@ -27,7 +26,7 @@ public class UserSerivceTest {
     private PasswordEncoder passwordEncoder;
 
     @InjectMocks
-    private AuthService userService;
+    private UserService userService;
 
     @Test
     public void sign_up_success(){

@@ -42,19 +42,27 @@ public class User implements UserDetails {
     @Column(name = "update_date", nullable = false)
     private LocalDateTime updateDate;
 
+    public String getUsername(){
+        return this.email;
+    }
+
+    public String getRealUsername(){
+        return this.username;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = List.of(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return "USER_ROLE";
+                return "ROLE_USER";
             }
         });
         if("OWNER".equals(this.userType)){
             authorities.add(new GrantedAuthority() {
                 @Override
                 public String getAuthority() {
-                    return "OWNER_ROLE";
+                    return "ROLE_OWNER";
                 }
             });
         }

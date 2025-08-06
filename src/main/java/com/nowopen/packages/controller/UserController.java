@@ -1,7 +1,6 @@
 package com.nowopen.packages.controller;
 
 import com.nowopen.packages.common.config.AppConfig;
-import com.nowopen.packages.service.AuthService;
 import com.nowopen.packages.dto.BaseResponse;
 import com.nowopen.packages.dto.UserDto;
 import com.nowopen.packages.service.UserService;
@@ -42,15 +41,15 @@ public class UserController {
                         .build());
     }
 
-//    @PostMapping("/sign-in")
-//    public ResponseEntity<BaseResponse<UserDto>> signIp(@RequestBody UserDto req){
-//        UserDto dto = userService.signIn(req);
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(BaseResponse.<UserDto>builder()
-//                        .result(true)
-//                        .payload(dto)
-//                        .build());
-//    }
+    @PostMapping("/sign-in")
+    public ResponseEntity<BaseResponse<UserDto>> signIp(@RequestBody UserDto req){
+        UserDto dto = userService.signIn(req);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(BaseResponse.<UserDto>builder()
+                        .result(true)
+                        .payload(dto)
+                        .build());
+    }
 
 }

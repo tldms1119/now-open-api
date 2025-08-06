@@ -1,16 +1,17 @@
 package com.nowopen.packages.common.filter;
 
 import com.nowopen.packages.service.JwtService;
-import com.nowopen.packages.service.AuthService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,11 +19,12 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
+@Log4j2
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final AuthService userDetailsService;
+    private final UserDetailsService userDetailsService;
     private final JwtService jwtService;
     private final HandlerExceptionResolver handlerExceptionResolver;
     @Override
@@ -39,7 +41,6 @@ public class JwtFilter extends OncePerRequestFilter {
             final String userEmail = jwtService.extractUserEmail(jwt);
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
             if (userEmail != null && authentication == null) {
                 // TODO implements caching
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);

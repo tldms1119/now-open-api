@@ -12,5 +12,7 @@ public class UserDto {
     private String email;
     private String password;
     private String username;
+    private String token;
+    private Long expireIn;
 
 }
