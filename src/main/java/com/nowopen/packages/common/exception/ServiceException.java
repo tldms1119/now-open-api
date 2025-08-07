@@ -17,6 +17,13 @@ public class ServiceException extends RuntimeException {
         this.errorSource = buildErrorSource();
     }
 
+    public ServiceException(HttpStatus status, String message) {
+        super();
+        this.httpStatus = status;
+        this.message = message;
+        this.errorSource = buildErrorSource();
+    }
+
     public ServiceException(HttpStatus status, String message, Throwable cause) {
         super(message, cause);
         this.httpStatus = status;

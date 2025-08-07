@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public UserDto signIn(UserDto dto) {
-        User user = userRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new ServiceException(HttpStatus.UNAUTHORIZED));
+        User user = userRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new ServiceException(HttpStatus.UNAUTHORIZED, "Wrong Email or Password."));
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword(), user.getAuthorities()));
         return UserDto.builder()
                 .email(user.getEmail())

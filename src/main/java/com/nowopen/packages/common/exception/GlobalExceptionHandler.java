@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
         log.error(e.getErrorSource());
         loggingRequestParams();
 
-        return ResponseEntity.status(e.getHttpStatus()).body(
+        return ResponseEntity.status(HttpStatus.OK).body(
                 ErrorResponse.builder()
                         .result(false)
                         .message(e.getMessage())
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
         log.error("[ERROR_MESSAGE]: " + e.getMessage());
         loggingRequestParams();
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+        return ResponseEntity.status(HttpStatus.OK).body(
                 ErrorResponse.builder()
                         .result(false)
                         .message(e.getMessage())
