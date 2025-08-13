@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private static final String[] AUTH_WHITELIST = {"/auth/**"};
+    private static final String[] AUTH_WHITELIST = {"/api/v1/auth/**"};
     private final JwtFilter jwtFilter;
     private final AuthenticationProvider authenticationProvider;
 

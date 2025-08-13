@@ -43,7 +43,7 @@ public class User implements UserDetails {
     private LocalDateTime updateDate;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Spots> spots;
+    private List<Spot> spots;
 
     public String getUsername(){
         return this.email;
