@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalTime;
-
 @Entity
-@Table(name = "spot_business_hour", schema = "public")
+@Table(name = "spot_business_hours", schema = "public")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,7 +28,7 @@ public class SpotBusinessHour {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spot_id", nullable = false)
-    private Spots spot;
+    private Spot spot;
 
     public SpotBusinessHour(Integer dayOfWeek, String openTime, String closeTime) {
         this.dayOfWeek = dayOfWeek;

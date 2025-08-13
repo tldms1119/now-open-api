@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "spots", schema = "public")
+@Table(name = "spot", schema = "public")
 @Getter
 @Setter
-public class Spots {
+public class Spot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +48,6 @@ public class Spots {
     private List<SpotBusinessHour> businessHours;
 
     @ElementCollection
-    private List<String> photos;
+    private List<String> photos;    // automatically insert spot_photos table (class + variable name) in database
 
 }

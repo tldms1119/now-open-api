@@ -1,5 +1,6 @@
 package com.nowopen.packages.dto;
 
+import com.nowopen.packages.entity.Spot;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.List;
 @Builder
 public class SpotsDto {
 
+    private Long id;
     private String name;
     private String description;
     private String latitude;
@@ -30,5 +32,13 @@ public class SpotsDto {
             this.openTime = openTime;
             this.closeTime = closeTime;
         }
+    }
+
+    public void dtoToEntity(Spot spot) {
+        spot.setName(this.getName());
+        spot.setDescription(this.getDescription());
+        spot.setLongitude(Double.valueOf(this.getLongitude()));
+        spot.setLatitude(Double.valueOf(this.getLatitude()));
+        spot.setPhotos(this.getPhotos());
     }
 }
